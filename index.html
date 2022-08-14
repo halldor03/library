@@ -6,7 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
     <link rel="stylesheet" href="./styles.css" />
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <form>
+      <label for="formTitle">Title:</label>
+      <input type="text" name="formTitle" id="formTitle" />
+      <label for="formAuthor">Author:</label>
+      <input type="text" name="formAuthor" id="formAuthor" />
+      <label for="formPages">No of pages:</label>
+      <input type="number" name="formPages" id="formPages" />
+      <label for="formRead">Did you read it?</label>
+      <input type="checkbox" name="formRead" id="formRead" />
+      <button id="addBook" type="reset">Add a book</button>
+    </form>
+    <div id="shelf"><span>My library</span></div>
+  </body>
 </html>

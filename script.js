@@ -1,5 +1,21 @@
-let myLibrary = [];
+// CONSTANTS
+const shelf = document.getElementById("shelf");
+//
 
+// SAMPLE BOOK
+const sampleBook = new book("Factfullness", "Hans Rosling", 368, "not read");
+function displaySampleBook(book) {
+  let addedBook = document.createElement("div");
+  shelf.appendChild(addedBook);
+  addedBook.classList.add("book");
+  addedBook.textContent = book.info();
+}
+displaySampleBook(sampleBook);
+//
+
+const myLibrary = [sampleBook];
+
+// OBJECT CONSTRUCTOR
 function book(title, author, pages, isRead) {
   this.title = title;
   this.author = author;
@@ -9,10 +25,23 @@ function book(title, author, pages, isRead) {
     return title + " by " + author + ", " + pages + " pages long, " + isRead;
   };
 }
-
-const HarryPotter = new book("Harry Potter", "J.K. Rowling", 325, "not read");
-console.log(HarryPotter.info());
+//
 
 function addBookToLibrary() {
-  // do stuff here
+  let bookTitle = formTitle.value;
+  let bookAuthor = formAuthor.value;
+  let bookPages = formPages.value;
+  let bookReadStatus = "yes";
+  let newBook = new book(bookTitle, bookAuthor, bookPages, bookReadStatus);
+  myLibrary.push(newBook);
+  displayBook(newBook);
 }
+
+function displayBook(book) {
+  let addedBook = document.createElement("div");
+  shelf.appendChild(addedBook);
+  addedBook.classList.add("book");
+  addedBook.textContent = book.info();
+}
+
+addBook.addEventListener("click", addBookToLibrary);
