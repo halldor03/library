@@ -2,13 +2,40 @@
 const shelf = document.getElementById("shelf");
 //
 
+//REMOVE BOOK
+removeBookFromLibrary = function (e) {
+  console.log(e);
+};
+//
+
 // SAMPLE BOOK
-const sampleBook = new book("Factfullness", "Hans Rosling", 368, "not read");
+const sampleBook = new book("Factfullness", "Hans Rosling", 368, "No");
 function displaySampleBook(book) {
-  let addedBook = document.createElement("div");
-  shelf.appendChild(addedBook);
-  addedBook.classList.add("book");
-  addedBook.textContent = book.info();
+  let newRow = document.createElement("tr");
+  shelf.appendChild(newRow);
+
+  let addedBookTitle = document.createElement("td");
+  newRow.appendChild(addedBookTitle);
+  addedBookTitle.textContent = book.title;
+
+  let addedBookAuthor = document.createElement("td");
+  newRow.appendChild(addedBookAuthor);
+  addedBookAuthor.textContent = book.author;
+
+  let addedBookPages = document.createElement("td");
+  newRow.appendChild(addedBookPages);
+  addedBookPages.textContent = book.pages;
+
+  let addedBookReadStatus = document.createElement("td");
+  newRow.appendChild(addedBookReadStatus);
+  addedBookReadStatus.textContent = book.isRead;
+
+  let removeBook = document.createElement("td");
+  newRow.appendChild(removeBook);
+  let removeBookButton = document.createElement("button");
+  removeBook.appendChild(removeBookButton);
+  removeBookButton.textContent = "Remove";
+  removeBookButton.addEventListener("click", removeBookFromLibrary);
 }
 displaySampleBook(sampleBook);
 //
@@ -21,12 +48,10 @@ function book(title, author, pages, isRead) {
   this.author = author;
   this.pages = pages;
   this.isRead = isRead;
-  this.info = function () {
-    return title + " by " + author + ", " + pages + " pages long, " + isRead;
-  };
 }
 //
 
+// ADD BOOK
 function addBookToLibrary() {
   let bookTitle = formTitle.value;
   let bookAuthor = formAuthor.value;
@@ -38,10 +63,32 @@ function addBookToLibrary() {
 }
 
 function displayBook(book) {
-  let addedBook = document.createElement("div");
-  shelf.appendChild(addedBook);
-  addedBook.classList.add("book");
-  addedBook.textContent = book.info();
+  let newRow = document.createElement("tr");
+  shelf.appendChild(newRow);
+
+  let addedBookTitle = document.createElement("td");
+  newRow.appendChild(addedBookTitle);
+  addedBookTitle.textContent = book.title;
+
+  let addedBookAuthor = document.createElement("td");
+  newRow.appendChild(addedBookAuthor);
+  addedBookAuthor.textContent = book.author;
+
+  let addedBookPages = document.createElement("td");
+  newRow.appendChild(addedBookPages);
+  addedBookPages.textContent = book.pages;
+
+  let addedBookReadStatus = document.createElement("td");
+  newRow.appendChild(addedBookReadStatus);
+  addedBookReadStatus.textContent = book.isRead;
+
+  let removeBook = document.createElement("td");
+  newRow.appendChild(removeBook);
+  let removeBookButton = document.createElement("button");
+  removeBook.appendChild(removeBookButton);
+  removeBookButton.textContent = "Remove";
+  removeBookButton.addEventListener("click", removeBookFromLibrary);
 }
 
 addBook.addEventListener("click", addBookToLibrary);
+//
