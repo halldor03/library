@@ -9,30 +9,51 @@
     <script src="./script.js" defer></script>
   </head>
   <body>
-    <form>
-      <label for="formTitle">Title:</label>
-      <input type="text" name="formTitle" id="formTitle" />
-      <label for="formAuthor">Author:</label>
-      <input type="text" name="formAuthor" id="formAuthor" />
-      <label for="formPages">No of pages:</label>
-      <input type="number" name="formPages" id="formPages" />
-      <label for="formRead">Did you read it?</label>
-      <input type="checkbox" name="formRead" id="formRead" />
-      <button id="addBook" type="reset">Add a book</button>
-    </form>
-    <table>
-      <caption>
-        My library
-      </caption>
-      <tbody id="shelf">
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Number of pages</th>
-          <th>Read status</th>
-          <th>Remove from library?</th>
-        </tr>
-      </tbody>
-    </table>
+    <div class="container">
+      <table>
+        <caption>
+          My Library
+        </caption>
+        <tbody id="shelf">
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Number of pages</th>
+            <th>Read status</th>
+            <th>Add/remove book</th>
+          </tr>
+          <tr>
+            <form>
+              <td>
+                <input
+                  type="text"
+                  name="formTitle"
+                  id="formTitle"
+                  placeholder="Enter title..."
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="formAuthor"
+                  id="formAuthor"
+                  placeholder="Enter author..."
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  name="formPages"
+                  id="formPages"
+                  placeholder="Enter no. of pages..."
+                />
+              </td>
+              <td><input type="checkbox" name="formRead" id="formRead" /></td>
+              <td><button id="addBook" type="reset">Add</button></td>
+            </form>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>
