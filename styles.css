@@ -8,6 +8,7 @@
 }
 
 body {
+  overflow-y: overlay;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,7 +19,6 @@ body {
   background-size: 115%;
   background-position: center;
   background-blend-mode: lighten;
-  overflow: scroll;
 }
 
 .container {
