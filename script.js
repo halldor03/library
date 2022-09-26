@@ -82,7 +82,7 @@ function refreshDOM() {
       }
     });
 
-    // adding book removal to DOM and array
+    // adding book removing utility to DOM and array
     let removeBook = document.createElement("td");
     newRow.appendChild(removeBook);
     let removeBookButton = document.createElement("button");
