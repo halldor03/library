@@ -33,6 +33,7 @@ function displayBooks() {
   if (!document.body.contains(newRow)) {
     refreshDOM();
   } else if (document.body.contains(newRow)) {
+    // removing previously created rows in order to refresh DOM
     document.querySelectorAll(".newRow").forEach((e) => e.remove());
     refreshDOM();
   }
@@ -45,18 +46,22 @@ function refreshDOM() {
     newRow.classList.add("newRow");
     shelf.appendChild(newRow);
 
+    // adding book title to DOM
     let addedBookTitle = document.createElement("td");
     newRow.appendChild(addedBookTitle);
     addedBookTitle.textContent = book.title;
 
+    // adding book autor to DOM
     let addedBookAuthor = document.createElement("td");
     newRow.appendChild(addedBookAuthor);
     addedBookAuthor.textContent = book.author;
 
+    // adding book pages to DOM
     let addedBookPages = document.createElement("td");
     newRow.appendChild(addedBookPages);
     addedBookPages.textContent = book.pages;
 
+    // adding book read status to DOM and array
     let addedBookReadStatus = document.createElement("td");
     newRow.appendChild(addedBookReadStatus);
     let readStatusButton = document.createElement("button");
@@ -77,6 +82,7 @@ function refreshDOM() {
       }
     });
 
+    // adding book removal to DOM and array
     let removeBook = document.createElement("td");
     newRow.appendChild(removeBook);
     let removeBookButton = document.createElement("button");
