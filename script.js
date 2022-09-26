@@ -1,20 +1,19 @@
 const myLibrary = [];
+let newRow;
 
 // OBJECT CONSTRUCTOR
-function book(title, author, pages) {
+function book(title, author, pages, readStatus) {
   this.title = title;
   this.author = author;
   this.pages = pages;
+  this.readStatus = readStatus;
 }
 //
 
 // SAMPLE BOOK
-function addSampleBook(title, author, pages) {
-  const sampleBook = new book(title, author, pages);
-  myLibrary.push(sampleBook);
-  // displayBook(sampleBook);
-}
-addSampleBook("Factfullness", "Hans Rosling", 368);
+const sampleBook = new book("Factfullness", "Hans Rosling", 368, "not read");
+myLibrary.push(sampleBook);
+displayBooks(sampleBook);
 //
 
 // ADD BOOK TO LIBRARY
@@ -22,62 +21,76 @@ function addBookToLibrary() {
   title = formTitle.value;
   author = formAuthor.value;
   pages = formPages.value;
-  const newBook = new book(title, author, pages);
+  if (formRead.checked) {
+    readStatus = "read";
+  } else readStatus = "not read";
+  const newBook = new book(title, author, pages, readStatus);
   myLibrary.push(newBook);
-  test();
-
-  // displayBook(newBook);
+  displayBooks();
 }
 
-function test() {
-  for (let i = 0; i <= myLibrary.length; i++) {
-    console.log(myLibrary[i]);
+function displayBooks() {
+  if (!document.body.contains(newRow)) {
+    refreshDOM();
+  } else if (document.body.contains(newRow)) {
+    document.querySelectorAll(".newRow").forEach((e) => e.remove());
+    refreshDOM();
   }
 }
 
-// function displayBook(book) {
-//   const shelf = document.getElementById("shelf");
+function refreshDOM() {
+  const shelf = document.getElementById("shelf");
+  myLibrary.forEach((book) => {
+    newRow = document.createElement("tr");
+    newRow.classList.add("newRow");
+    shelf.appendChild(newRow);
 
-//   let newRow = document.createElement("tr");
-//   shelf.appendChild(newRow);
+    let addedBookTitle = document.createElement("td");
+    newRow.appendChild(addedBookTitle);
+    addedBookTitle.textContent = book.title;
 
-//   let addedBookTitle = document.createElement("td");
-//   newRow.appendChild(addedBookTitle);
-//   addedBookTitle.textContent = book.title;
+    let addedBookAuthor = document.createElement("td");
+    newRow.appendChild(addedBookAuthor);
+    addedBookAuthor.textContent = book.author;
 
-//   let addedBookAuthor = document.createElement("td");
-//   newRow.appendChild(addedBookAuthor);
-//   addedBookAuthor.textContent = book.author;
+    let addedBookPages = document.createElement("td");
+    newRow.appendChild(addedBookPages);
+    addedBookPages.textContent = book.pages;
 
-//   let addedBookPages = document.createElement("td");
-//   newRow.appendChild(addedBookPages);
-//   addedBookPages.textContent = book.pages;
+    let addedBookReadStatus = document.createElement("td");
+    newRow.appendChild(addedBookReadStatus);
+    let readStatusButton = document.createElement("button");
+    if (book.readStatus === "read") {
+      readStatusButton.textContent = "Read";
+      addedBookReadStatus.appendChild(readStatusButton);
+    } else {
+      readStatusButton.textContent = "Not read";
+      addedBookReadStatus.appendChild(readStatusButton);
+    }
+    readStatusButton.addEventListener("click", () => {
+      if (readStatusButton.textContent === "Not read") {
+        readStatusButton.textContent = "Read";
+        book.readStatus = "read";
+      } else if (readStatusButton.textContent === "Read") {
+        readStatusButton.textContent = "Not read";
+        book.readStatus = "not read";
+      }
+    });
 
-//   let addedBookReadStatus = document.createElement("td");
-//   newRow.appendChild(addedBookReadStatus);
-//   let readStatusButton = document.createElement("button");
-//   if (formRead.checked === true) {
-//     readStatusButton.textContent = "Read";
-//     addedBookReadStatus.appendChild(readStatusButton);
-//   } else {
-//     readStatusButton.textContent = "Not read";
-//     addedBookReadStatus.appendChild(readStatusButton);
-//   }
-//   readStatusButton.addEventListener("click", () => {
-//     if (readStatusButton.textContent === "Not read") {
-//       readStatusButton.textContent = "Read";
-//     } else readStatusButton.textContent = "Not read";
-//   });
-
-//   let removeBook = document.createElement("td");
-//   newRow.appendChild(removeBook);
-//   let removeBookButton = document.createElement("button");
-//   removeBook.appendChild(removeBookButton);
-//   removeBookButton.textContent = "Remove";
-//   removeBookButton.addEventListener("click", () => {
-//     newRow.remove();
-//   });
-// }
+    let removeBook = document.createElement("td");
+    newRow.appendChild(removeBook);
+    let removeBookButton = document.createElement("button");
+    removeBook.appendChild(removeBookButton);
+    removeBookButton.textContent = "Remove";
+    removeBookButton.addEventListener("click", () => {
+      let index = myLibrary.indexOf(book);
+      myLibrary.splice(index, 1);
+      document.querySelectorAll(".newRow").forEach((e) => e.remove());
+      refreshDOM();
+    });
+  });
+  // console.log(myLibrary);
+}
 
 addBook.addEventListener("click", addBookToLibrary);
 //
